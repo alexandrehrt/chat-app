@@ -1,20 +1,18 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   max-width: 1120px;  
   margin: 0 auto;
   height: 100vh;
-  
+
 
   display: flex;
   justify-content: center;  
   align-items: center;
 `;
 
-export const InnerContainer = styled.div`
+export const Content = styled.div`
   border: none;
-  border-radius: 8px;
   padding: 18px;
   display: flex;
   flex-direction: column;
@@ -28,24 +26,10 @@ export const InnerContainer = styled.div`
     padding-bottom: 10px;
     border-bottom: 2px solid white;
   }
-  
-
-  input {
-    margin-top: 20px;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 5px;
-  }
-`;
-
-export const SignInLink = styled(Link)`
-  margin-top: 20px;
-  width: 100%;
-  display: flex;
-  text-decoration: none;
 
   button {
-    flex: 1;
+    width: 100%;
+    margin-top: 10px;
     padding: 20px;
     border-radius: 5px;
     border: none;
@@ -58,5 +42,10 @@ export const SignInLink = styled(Link)`
     &:hover {
       background-color: #186BFA;
     }
-  }
-`;
+  }`;
+  
+
+
+
+
+
