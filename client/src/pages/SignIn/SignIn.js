@@ -13,9 +13,12 @@ function SignIn() {
   const { signIn } = useContext(AuthContext);
 
   const handleSubmit = ({ name, room }) => {
-    signIn({name, room})
-
-    history.push('/chat');
+    if (name === '' || room === '') {
+      alert('Name and room are necessary')
+    } else {
+        signIn({ name, room });
+        history.push('/chat');
+    }
   };
 
   return (
@@ -23,8 +26,8 @@ function SignIn() {
       <Content>
         <Form onSubmit={handleSubmit}>
           <h1>Join</h1>
-          <Input name="name" type="text" />
-          <Input name="room" type="text" />
+          <Input name="name" type="text" placeholder="Enter your username"/>
+          <Input name="room" type="text" placeholder="Room" />
 
           <button type='submit'>Sign In</button>
         </Form>

@@ -1,11 +1,13 @@
 import React, {useState, useEffect, useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
-import queryString from 'query-string';
 import io from 'socket.io-client';
 
 import { AuthContext } from '../../context/auth';
 
-import { Container, InnerContainer } from './styles';
+import Infobar from '../../components/Infobar';
+import Messages from '../../components/Messages';
+import ChatInput from '../../components/ChatInput';
+
+import { Container, Components } from './styles';
 
 let socket;
 
@@ -14,25 +16,24 @@ function Chat() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
-  // const history = useHistory();
-
   const ENDPOINT = 'localhost:5000';
 
   useEffect(() => {
     socket = io(ENDPOINT);
 
+    // Join room
     socket.emit('join', { name, room }, (error) => {
       if(error) {
         alert(error);
       }
     });
-  }, [ENDPOINT]);
+  }, [ENDPOINT, name, room]);
 
   // Save messages
   useEffect(() => {
     socket.on('message', (message) => {
-      setMessages(messages => [...messages, message]);
-    })
+      setMessages([...messages, message]);
+    });
   }, [messages]);
 
   // Send messages
@@ -48,13 +49,11 @@ function Chat() {
 
   return (
     <Container>
-      <InnerContainer>
-        <input 
-          value={message}
-          onChange={(event) => setMessage(event.target.value)}
-          onKeyPress={(event) => event.key === 'Enter' ? sendMessage(event) : null}
-        />
-      </InnerContainer>
+      <Components>
+        <Infobar room={room} />
+        <Messages messages={messages} name={name} />
+        <ChatInput message={message} setMessage={setMessage} sendMessage={sendMessage} />
+      </Components>
     </Container>
   );
 };

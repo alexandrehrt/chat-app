@@ -18,6 +18,7 @@ export default function Input({ name, ...rest }) {
   return (
     <Container>
       <input ref={inputRef} defaultValue={defaultValue} {...rest} />
+      {error && <span className="error">{error}</span>}
     </Container>
   );
 };
